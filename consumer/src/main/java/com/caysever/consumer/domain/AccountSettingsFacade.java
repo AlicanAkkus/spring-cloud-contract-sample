@@ -8,11 +8,7 @@ public class AccountSettingsFacade {
         this.retrieveAccountSettingsService = retrieveAccountSettingsService;
     }
 
-    public Account retrieveAccountById(Long accountId) {
-        return retrieveAccountSettingsService.retrieveAccount(accountId);
-    }
-
-    public Account retrieveAccountByIdentifier(String accountIdentifier) {
-        return retrieveAccountSettingsService.retrieveAccount(accountIdentifier);
+    public AccountSettings retrieveAccountById(Long accountId) {
+        return retrieveAccountSettingsService.retrieveAccountSettings(accountId);
     }
 }

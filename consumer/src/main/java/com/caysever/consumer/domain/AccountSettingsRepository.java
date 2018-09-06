@@ -7,6 +7,8 @@ public interface AccountSettingsRepository {
 
     Optional<AccountSettingsEntity> retrieveById(Long id);
 
+    Optional<AccountSettingsEntity> retrieveByAccountId(Long accountId);
+
     List<AccountSettingsEntity> retrieveAll();
 
     void create(AccountSettings accountSettings);

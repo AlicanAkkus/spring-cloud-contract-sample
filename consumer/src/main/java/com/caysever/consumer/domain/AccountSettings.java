@@ -8,6 +8,8 @@ import lombok.Data;
 public class AccountSettings {
 
     private Long accountId;
+    private String name;
+    private String surname;
     private boolean verified;
     private boolean pushNotificationEnabled;
     private Long createdDate;

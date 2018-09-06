@@ -6,32 +6,35 @@ import java.util.function.Function;
 public class RetrieveAccountSettingsService {
 
     private final AccountSettingsRepository accountSettingsRepository;
+    private final AccountPort accountPort;
 
-    public RetrieveAccountSettingsService(AccountSettingsRepository accountSettingsRepository) {
+    public RetrieveAccountSettingsService(AccountSettingsRepository accountSettingsRepository, AccountPort accountPort) {
         this.accountSettingsRepository = accountSettingsRepository;
+        this.accountPort = accountPort;
     }
 
-    Account retrieveAccount(Long accountId) {
-        return accountSettingsRepository.retrieveById(accountId)
+    AccountSettings retrieveAccountSettings(Long accountId) {
+        return accountSettingsRepository.retrieveByAccountId(accountId)
                 .map(convert())
+                .map(addAccountInfo())
                 .orElseThrow(RuntimeException::new);
     }
 
-    Account retrieveAccount(String accountIdentifier) {
-        return accountSettingsRepository.retrieveByIdentifier(accountIdentifier)
-                .map(convert())
-                .orElseThrow(RuntimeException::new);
+    private Function<AccountSettings, AccountSettings> addAccountInfo() {
+        return accountSettings -> {
+            Account account = accountPort.retrieve(accountSettings.getAccountId());
+            accountSettings.setName(account.getName());
+            accountSettings.setSurname(account.getSurname());
+
+            return accountSettings;
+        };
     }
 
-    private Function<AccountEntity, Account> convert() {
-        return accountEntity -> Account.builder()
-                .name(accountEntity.getName())
-                .surname(accountEntity.getSurname())
-                .createdDate(accountEntity.getCreatedDate().toEpochSecond(ZoneOffset.UTC))
-                .updatedDate(accountEntity.getUpdatedDate().toEpochSecond(ZoneOffset.UTC))
-                .gender(accountEntity.getGender())
-                .gsmNumber(accountEntity.getGsmNumber())
-                .identifier(accountEntity.getIdentifier())
+    private Function<AccountSettingsEntity, AccountSettings> convert() {
+        return accountSettingsEntity -> AccountSettings.builder()
+                .accountId(accountSettingsEntity.getAccountId())
+                .createdDate(accountSettingsEntity.getCreatedDate().toEpochSecond(ZoneOffset.UTC))
+                .updatedDate(accountSettingsEntity.getUpdatedDate().toEpochSecond(ZoneOffset.UTC))
                 .build();
     }
 }

@@ -3,12 +3,14 @@ package com.caysever.consumer.domain;
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "account_settings")
+@EntityListeners(AuditingEntityListener.class)
 public class AccountSettingsEntity {
 
     @Id
