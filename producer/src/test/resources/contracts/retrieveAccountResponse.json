@@ -1,9 +1,9 @@
 {
-    "createdDate": "1514851199",
-    "updatedDate": "1514851199",
     "name": "Name",
     "surname": "Surname",
     "gender": "Gender",
     "gsmNumber": "GsmNumber",
-    "identifier": "Identifier"
+    "identifier": "Identifier",
+    "createdDate": 1514851199,
+    "updatedDate": 1514851199
 }

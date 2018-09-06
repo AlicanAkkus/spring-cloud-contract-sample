@@ -110,7 +110,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <!-- Provide the base class for your auto-generated tests -->
-                    <baseClassForTests>com.caysever.producer.ProducerBaseTest</baseClassForTests>
+                    <baseClassForTests>com.caysever.producer.ProducerBaseContractTest</baseClassForTests>
                     <testMode>EXPLICIT</testMode>
                 </configuration>
             </plugin>

@@ -1,19 +1,26 @@
 package com.caysever.producer.domain;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "account")
+@EntityListeners(AuditingEntityListener.class)
 public class AccountEntity {
 
     @Id
     @GeneratedValue
     private Long id;
 
+    @CreatedDate
     @Column(name = "created_date", nullable = false)
     private LocalDateTime createdDate;
 
+    @LastModifiedDate
     @Column(name = "updated_date", nullable = false)
     private LocalDateTime updatedDate;
 

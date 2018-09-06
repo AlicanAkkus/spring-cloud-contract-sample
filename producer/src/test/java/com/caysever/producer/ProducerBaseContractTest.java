@@ -5,6 +5,7 @@ import com.caysever.producer.domain.AccountRepository;
 import io.restassured.RestAssured;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,11 +19,12 @@ import org.springframework.web.context.WebApplicationContext;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ProducerBaseTest {
+public class ProducerBaseContractTest {
 
     @Autowired
     private WebApplicationContext context;
@@ -43,6 +45,13 @@ public class ProducerBaseTest {
 
         AccountEntity accountEntity = createAccountEntity();
         when(accountRepository.retrieveById(1L)).thenReturn(Optional.of(accountEntity));
+    }
+
+    //Due to java.lang.Exception: No runnable methods exception in running JUnits.
+    //https://stackoverflow.com/questions/24319697/java-lang-exception-no-runnable-methods-exception-in-running-junits
+    @Test
+    public void mockTest(){
+        assertThat(1L).isEqualTo(1L);
     }
 
     private AccountEntity createAccountEntity() {

@@ -1,4 +1,4 @@
-package com.caysever.producer.domain;
+package com.caysever.consumer.domain;
 
 import lombok.Builder;
 import lombok.Data;
