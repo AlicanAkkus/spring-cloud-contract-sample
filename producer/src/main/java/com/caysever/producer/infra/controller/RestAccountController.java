@@ -19,7 +19,7 @@ public class RestAccountController {
     }
 
     @GetMapping
-    public Mono<Account> retrieve(@RequestParam Long accountId) {
-        return Mono.justOrEmpty(accountFacade.retrieveAccountById(accountId));
+    public Mono<Account> retrieve(@RequestParam Long id) {
+        return Mono.justOrEmpty(accountFacade.retrieveAccountById(id));
     }
 }
